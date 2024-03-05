@@ -1,0 +1,17 @@
+{
+	"name": "@furrynovel/media",
+	"type": "module",
+	"version": "1.0.0",
+	"description": "",
+	"main": "entry.js",
+	"scripts": {
+		"build": "node main.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"glob": "^10.3.10",
+		"sharp": "^0.33.2"
+	}
+}
