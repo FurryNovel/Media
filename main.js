@@ -21,6 +21,22 @@ for (const name of Object.keys(assets)) {
     await processImage(sharp, name.replace(path.extname(name), ''))
 }
 
+const generatedAssets = Object.fromEntries(
+    globSync('dist/**/*.*').map(file => [
+        path.relative('dist', file),
+        fileURLToPath(new URL(file, import.meta.url))
+    ])
+);
+
+let assetsIndexes = `<html><hrad><title>FurryNovel/Media</title></hrad><body><!--Indexes--></body></html>`;
+let indexesContent = '';
+for (let name of Object.keys(generatedAssets)) {
+    name = name.replace(/\\/g, '/');
+    indexesContent += `<a href="${name}">${name}</a><br>`;
+}
+assetsIndexes = assetsIndexes.replace('<!--Indexes-->', indexesContent);
+fs.writeFileSync('dist/index.html', assetsIndexes);
+
 
 async function processImage(sharp, name) {
     const tasks = [];
